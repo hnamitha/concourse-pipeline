@@ -1,0 +1,30 @@
+resources:
+  - name: scripts-repo
+    type: git
+    source:
+      uri: https://github.com/hnamitha/concourse-pipeline.git
+      branch: master  # or any specific branch/tag you want to use
+
+jobs:
+  - name: run-script
+    plan:
+      - get: scripts-repo
+        trigger: true
+      - task: execute-script
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source: { repository: ubuntu }
+          inputs:
+            - name: scripts-repo
+          params:
+            ENVIRONMENT: dev  # Replace with the environment you want to run
+          run:
+            path: /bin/bash
+            args:
+              - -c
+              - |
+                chmod +x dynatrace.sh
+                dynatrace.sh ${ENVIRONMENT}
+
