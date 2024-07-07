@@ -18,7 +18,7 @@ function setup_directory {
 
 case "${env}" in
   dev)
-    profile=674312962124:Admin
+    #profile=674312962124:Admin
     url=https://mya27733.apps.dynatrace.com/platform/document/v1/documents
     setup_directory "${env}"
     ;;
