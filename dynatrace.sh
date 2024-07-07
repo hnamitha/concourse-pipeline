@@ -52,12 +52,10 @@ esac
 client_id=$(aws ssm get-parameter \
                 --name "${PARAMETER_ID}" \
                 --with-decryption --region  eu-west-1 \
-                --profile ${profile}  \
                 --query "Parameter.Value" --output text)
 
 client_secret=$(aws ssm get-parameter \
                 --name "${PARAMETER_SECRET}" --with-decryption  --region eu-west-1 \
-                --profile ${profile} \
                 --query "Parameter.Value" --output text)
 
 if [ -z "${client_id}" ]; then
